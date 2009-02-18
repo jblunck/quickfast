@@ -45,9 +45,8 @@ FieldInstructionTemplateRef::decodeNop(
     TemplateCPtr target;
     if(!decoder.findTemplate(templateName_, templateNamespace_, target))
     {
-      throw TemplateDefinitionError("[ERR D9] Unknown template name for static templateref.");
+      decoder.reportFatal("[ERR D9]", "Unknown template name for static templateref.");
     }
-
 
     bool present = true;
     if(!isMandatory())
@@ -103,7 +102,7 @@ FieldInstructionTemplateRef::encodeNop(
 {
   if(templateName_.empty())
   {
-    throw TemplateDefinitionError("Encoding dynamic templates is not supported.");
+    encoder.reportFatal("[ERR I1]", "Encoding dynamic templates is not supported.");
 
   }
   else
@@ -113,13 +112,13 @@ FieldInstructionTemplateRef::encodeNop(
     TemplateCPtr target;
     if(!encoder.findTemplate(templateName_, templateNamespace_, target))
     {
-      throw TemplateDefinitionError("[ERR D9] Unknown template name for static templateref.");
+      encoder.reportFatal("[ERR D9]", "Unknown template name for static templateref.");
     }
 
     // retrieve the field corresponding to this templateRef
     // which if it exists should be a FieldGroup
     Messages::FieldCPtr field;
-    if(fieldSet.getField(identity_.name(), field))
+    if(fieldSet.getField(identity_->name(), field))
     {
       Messages::GroupCPtr group = field->toGroup();
       encoder.encodeGroup(
@@ -129,38 +128,13 @@ FieldInstructionTemplateRef::encodeNop(
     }
     else
     {
-#if 0
-        // corresponding group field does not appear in application message.
-        // There are two possibilites:
-        //   1) this templateRef (mandatory or optional) has the same application type
-        //      as the enclosing segment, and has therefore been merged into that segment.
-        //   2) this is an optional templateRef that isn't present.
-      if(fieldSet.getApplicationType() == getApplicationType())
-      {
-#endif
-        // possiblity #1: encode this template using the original fieldSet
-        encoder.encodeGroup(
-          destination,
-          target,
-          fieldSet);
-#if 0
-      }
-      else
-      {
-        // possibility #2: option template not present.
-        if(isMandatory())
-        {
-          throw EncodingError("Missing mandatory templateRef/group.");
-        }
-        // let our counterparty know it's just not there.
-        pmap.setNextField(false);
-      }
-#endif
+      encoder.encodeGroup(
+        destination,
+        target,
+        fieldSet);
     }
   }
 }
-
-
 
 void
 FieldInstructionTemplateRef::interpretValue(const std::string & value)

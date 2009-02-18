@@ -184,6 +184,7 @@ namespace QuickFAST{
       mutable unsigned long refcount_;
     };
 
+#if 0 // declared in the _fwd.h file
     /// @brief Support boost::intrusive_ptr
     /// @param ptr to target Field
     void QuickFAST_Export intrusive_ptr_add_ref(const Messages::Field * ptr);
@@ -191,6 +192,7 @@ namespace QuickFAST{
     /// @brief Support boost::intrusive_ptr
     /// @param ptr to target Field
     void QuickFAST_Export intrusive_ptr_release(const Messages::Field * ptr);
+#endif
   }
 }
 #endif // FIELD_H

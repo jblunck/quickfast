@@ -25,7 +25,7 @@ namespace QuickFAST{
     private:
       void formatMessage(Messages::Message & message);
       void formatSequence(
-        const Messages::FieldIdentity & identity,
+        Messages::FieldIdentityCPtr & identity,
         Messages::FieldCPtr & field);
       void formatGroup(Messages::FieldCPtr & field);
 

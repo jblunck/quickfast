@@ -33,8 +33,8 @@ FieldInstructionDecimal::FieldInstructionDecimal()
   : typedExponent_(0)
   , typedMantissa_(0)
   , typedValue_(0,0)
-  , mantissaInstruction_(new FieldInstructionMantissa(identity_.getLocalName() + "|decimal_mantissa", identity_.getNamespace()))
-  , exponentInstruction_(new FieldInstructionExponent(identity_.getLocalName() + "|decimal_exponent", identity_.getNamespace()))
+  , mantissaInstruction_(new FieldInstructionMantissa(identity_->getLocalName() + "|decimal_mantissa", identity_->getNamespace()))
+  , exponentInstruction_(new FieldInstructionExponent(identity_->getLocalName() + "|decimal_exponent", identity_->getNamespace()))
 {
 }
 
@@ -334,7 +334,7 @@ FieldInstructionDecimal::encodeNop(
 {
   // get the value from the application data
   Messages::FieldCPtr field;
-  if(fieldSet.getField(identity_.name(), field))
+  if(fieldSet.getField(identity_->name(), field))
   {
     Decimal value = field->toDecimal();
     exponent_t exponent = value.getExponent();
@@ -383,7 +383,7 @@ FieldInstructionDecimal::encodeConstant(
 {
   // get the value from the application data
   Messages::FieldCPtr field;
-  if(fieldSet.getField(identity_.name(), field))
+  if(fieldSet.getField(identity_->name(), field))
   {
     Decimal value = field->toDecimal();
     if(value != typedValue_)
@@ -415,7 +415,7 @@ FieldInstructionDecimal::encodeDefault(
 {
   // get the value from the application data
   Messages::FieldCPtr field;
-  if(fieldSet.getField(identity_.name(), field))
+  if(fieldSet.getField(identity_->name(), field))
   {
     Decimal value = field->toDecimal();
     if(value == typedValue_)
@@ -485,7 +485,7 @@ FieldInstructionDecimal::encodeCopy(
 
   // get the value from the application data
   Messages::FieldCPtr field;
-  if(fieldSet.getField(identity_.name(), field))
+  if(fieldSet.getField(identity_->name(), field))
   {
     Decimal value = field->toDecimal();
 
@@ -557,7 +557,7 @@ FieldInstructionDecimal::encodeDelta(
 
   // get the value from the application data
   Messages::FieldCPtr field;
-  if(fieldSet.getField(identity_.name(), field))
+  if(fieldSet.getField(identity_->name(), field))
   {
     Decimal value = field->toDecimal();
 
