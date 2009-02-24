@@ -1,9 +1,20 @@
+Tue Feb 24 15:11:47 UTC 2009  Dale Wilson  <wilsond@ociweb.com>
+
+        * src/Examples/Examples/MessageInterpreter.h:
+        * src/Examples/Examples/MessageInterpreter.cpp:
+        * src/Messages/Field.h:
+        * src/Messages/Field.cpp:
+        * src/Messages/FieldIdentity.h:
+        * src/Messages/FieldIdentity.cpp:
+        * src/Messages/FieldIdentity_fwd.h:
+        Inline code for intrusive Field pointers.
+
 Fri Feb 20 22:07:39 UTC 2009  Curt Campbell  <campbellc@ociweb.com>
 
         * src/DotNet/FieldIdentity.cpp
         * src/DotNet/FieldIdentity.h
         * src/DotNet/FieldSet.cpp
-        * src/DotNet/UnmanagedPtr.h        
+        * src/DotNet/UnmanagedPtr.h
         Fixed broken build due to use of intrusive pointer
         in last check-in.
 

@@ -33,6 +33,7 @@ FieldIdentity::freeFieldIdentity()const
   delete this;
 }
 
+#if 0
 
 void
 Messages::intrusive_ptr_add_ref(const Messages::FieldIdentity * ptr)
@@ -62,3 +63,5 @@ Messages::intrusive_ptr_release(Messages::FieldIdentity * ptr)
     ptr->freeFieldIdentity();
   }
 }
+
+#endif

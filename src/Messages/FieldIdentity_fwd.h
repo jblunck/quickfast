@@ -12,9 +12,14 @@ namespace QuickFAST{
   namespace Messages{
     class FieldIdentity;
     /// @brief An intrusive smart pointer to a const FieldIdentity
+#define UNSAFE_BUT_FASTx
+#ifdef UNSAFE_BUT_FAST
+    typedef const FieldIdentity * FieldIdentityCPtr;
+    typedef FieldIdentity * FieldIdentityPtr;
+#else //UNSAFE_BUT_FAST
     typedef boost::intrusive_ptr<const FieldIdentity> FieldIdentityCPtr;
     typedef boost::intrusive_ptr<FieldIdentity> FieldIdentityPtr;
-
+#endif // UNSAFE_BUT_FAST
     void QuickFAST_Export intrusive_ptr_add_ref(const FieldIdentity * ptr);
     void QuickFAST_Export intrusive_ptr_release(const FieldIdentity * ptr);
     void QuickFAST_Export intrusive_ptr_add_ref(FieldIdentity * ptr);

@@ -41,8 +41,8 @@ MessageInterpreter::formatMessage(Messages::Message & message)
     it != message.end();
     ++it)
   {
-    Messages::FieldIdentityCPtr identity = it->getIdentity();
-    Messages::FieldCPtr field = it->getField();
+    Messages::FieldIdentityCPtr & identity = it->getIdentity();
+    const Messages::FieldCPtr & field = it->getField();
     Messages::Field::FieldType type = field->getType();
     if(type == Messages::Field::SEQUENCE)
     {
@@ -68,7 +68,7 @@ MessageInterpreter::newline()
 void
 MessageInterpreter::formatSequence(
   Messages::FieldIdentityCPtr & identity,
-  Messages::FieldCPtr & field)
+  const Messages::FieldCPtr & field)
 {
   Messages::SequenceCPtr sequence = field->toSequence();
   size_t count = sequence->size();
@@ -91,8 +91,8 @@ MessageInterpreter::formatSequence(
       ++fsit)
     {
       // todo: refactor with message decoding
-      Messages::FieldIdentityCPtr identity = fsit->getIdentity();
-      Messages::FieldCPtr field = fsit->getField();
+      Messages::FieldIdentityCPtr & identity = fsit->getIdentity();
+      const Messages::FieldCPtr & field = fsit->getField();
       Messages::Field::FieldType type = field->getType();
       if(type == Messages::Field::SEQUENCE)
       {
@@ -114,13 +114,13 @@ MessageInterpreter::formatSequence(
 }
 
 void
-MessageInterpreter::formatGroup(Messages::FieldCPtr & field)
+MessageInterpreter::formatGroup(const Messages::FieldCPtr & field)
 {
 }
 
 
 void
-MessageInterpreter::displayFieldValue(Messages::FieldCPtr field)
+MessageInterpreter::displayFieldValue(const Messages::FieldCPtr & field)
 {
   switch(field->getType())
   {
